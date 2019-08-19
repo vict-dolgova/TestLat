@@ -1,0 +1,102 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @library.number %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @library.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @library.address %>
+</p>
+<nav>
+  <a> Сотрудники</a>
+  <a>Книги</a>
+  <a>Абоненты</a>
+</nav>
+
+<h1>Сотрудники</h1>
+<p>Добавить</p>
+
+<%= form_with(model: [ @library, @library.employees.build ], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :middleName %>
+    <%= form.text_field :middleName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthDate %>
+    <%= form.date_select :birthDate, {order: [:day, :month, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true}%>
+  </div>
+
+  <div class="field">
+    <%= form.label :employmentDate %>
+    <%= form.date_select :employmentDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
+  </div>
+
+  <div class="field">
+    <%= form.label :position %>
+    <%= form.text_field :position %>
+  </div>
+
+  <div class="field">
+    <%= form.label :education %>
+    <%= form.text_field :education %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<%end%>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Дата рождения</th>
+      <th>Дата принятия на работу</th>
+      <th>Должность</th>
+      <th>Образование</th>
+      <th colspan="7"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @library.employees.each do |employee| %>
+      <% if employee.id %>
+        <tr>
+          <td><%= employee.id %></td>
+          <td><%= employee.surname %></td>
+          <td><%= employee.name %></td>
+          <td><%= employee.middleName %></td>
+          <td><%= employee.birthDate %></td>
+          <td><%= employee.employmentDate %></td>
+          <td><%= employee.position %></td>
+          <td><%= employee.education %></td>
+          <td><%= link_to 'Редактировать', edit_employee_path(employee) %> </td>
+          <td><%= link_to 'Удалить', employee, method: :delete, data: { confirm: 'Вы уверены?' }%></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', libraries_path %>
