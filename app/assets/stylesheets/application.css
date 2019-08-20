@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+.cover{
+  height: 100px;
+}

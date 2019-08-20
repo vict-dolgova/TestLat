@@ -75,7 +75,7 @@
       <th>Дата принятия на работу</th>
       <th>Должность</th>
       <th>Образование</th>
-      <th colspan="7"></th>
+      <th colspan="8"></th>
     </tr>
   </thead>
 
@@ -97,6 +97,161 @@
       <% end %>
     <% end %>
   </tbody>
+</table>
+
+<h1>Книги</h1>
+
+<p>Добавить</p>
+<%= form_with(model: [ @library, @library.books.build ], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :author %>
+    <%= form.text_field :author %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cipher %>
+    <%= form.text_field :cipher %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cover %>
+    <%= form.file_field :cover %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publishingHouse %>
+    <%= form.text_field :publishingHouse %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publishingYear %>
+    <%= form.date_select :publishingYear, {order: [:year], start_year: Date.today.year, end_year: Date.today.year - 500}, {required: true}%>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :receiptDate %>
+    <%= form.date_select :receiptDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<%end%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Наименование</th>
+      <th>Автор</th>
+      <th>Шифр</th>
+      <th>Обложка</th>
+      <th>Издательство</th>
+      <th>Год издания</th>
+      <th>Цена</th>
+      <th>Дата поступления</th>
+      <th colspan="8"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @library.books.each do |book| %>
+      <% if book.id %>
+        <tr>
+          <td><%= book.name %></td>
+          <td><%= book.author %></td>
+          <td><%= book.cipher %></td>
+          <td><%= image_tag(book.cover.url) if book.cover.exists?%></td>
+          <td><%= book.publishingHouse %></td>
+          <td><%= book.publishingYear.year %></td>
+          <td><%= book.price %></td>
+          <td><%= book.receiptDate %></td>
+          <td><%= link_to 'Редактировать', edit_book_path(book) %> </td>
+          <td><%= link_to 'Удалить', book, method: :delete, data: { confirm: 'Вы уверены?' }%></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h1>Абоненты</h1>
+<p>Добавить</p>
+
+<%= form_with(model: [ @library, @library.subscribers.build ], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :ticketnumber %>
+    <%= form.number_field :ticketnumber %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :middleName %>
+    <%= form.text_field :middleName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<%end%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Номер билета</th>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Адрес</th>
+      <th>Телефон</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+
+<tbody>
+  <% @library.subscribers.each do |subscriber| %>
+    <% if subscriber.id %>
+      <tr>
+        <td><%= subscriber.ticketnumber %></td>
+        <td><%= subscriber.surname %></td>
+        <td><%= subscriber.name %></td>
+        <td><%= subscriber.middleName %></td>
+        <td><%= subscriber.address %></td>
+        <td><%= subscriber.phone %></td>
+        <td><%= link_to 'Редактировать', edit_subscriber_path(subscriber) %> </td>
+        <td><%= link_to 'Удалить', subscriber, method: :delete, data: { confirm: 'Вы уверены?' }%></td>
+      </tr>
+    <% end %>
+  <% end %>
+</tbody>
 </table>
 
 <%= link_to 'Back', libraries_path %>

@@ -1,0 +1,46 @@
+<%= form_for book do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :author %>
+    <%= form.text_field :author %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cipher %>
+    <%= form.text_field :cipher %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cover %>
+    <%= form.file_field :cover %>
+    <%= image_tag(book.cover.url) if book.cover.exists?%>
+  </div>
+
+  <div class="field">
+    <%= form.label :publishingHouse %>
+    <%= form.text_field :publishingHouse %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publishingYear %>
+    <%= form.date_select :publishingYear, {order: [:year], start_year: Date.today.year, end_year: Date.today.year - 500}, {required: true}%>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :receiptDate %>
+    <%= form.date_select :receiptDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<%end%>

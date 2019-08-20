@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_111425) do
+ActiveRecord::Schema.define(version: 2019_08_20_130309) do
+
+  create_table "books", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "author", null: false
+    t.string "cipher", null: false
+    t.string "cover_file_name"
+    t.string "cover_content_type"
+    t.integer "cover_file_size"
+    t.datetime "cover_updated_at"
+    t.string "publishingHouse", null: false
+    t.date "publishingYear", null: false
+    t.integer "price", null: false
+    t.date "receiptDate", null: false
+    t.integer "library_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["library_id"], name: "index_books_on_library_id"
+  end
 
   create_table "employees", force: :cascade do |t|
     t.string "surname", null: false
@@ -32,6 +50,19 @@ ActiveRecord::Schema.define(version: 2019_08_14_111425) do
     t.string "address", default: " ", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subscribers", force: :cascade do |t|
+    t.integer "ticketnumber", null: false
+    t.string "surname", null: false
+    t.string "name", null: false
+    t.string "middleName"
+    t.string "address", null: false
+    t.string "phone"
+    t.integer "library_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["library_id"], name: "index_subscribers_on_library_id"
   end
 
 end
