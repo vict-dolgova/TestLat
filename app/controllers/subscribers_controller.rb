@@ -5,6 +5,10 @@ class SubscribersController < ApplicationController
     redirect_to library_path(@library)
   end
 
+  def show
+    @subscriber =  Subscriber.find(params[:id])
+  end
+
   def edit
     @subscriber =  Subscriber.find(params[:id])
   end

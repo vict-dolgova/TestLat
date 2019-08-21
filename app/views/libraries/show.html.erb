@@ -175,6 +175,7 @@
           <td><%= book.publishingYear.year %></td>
           <td><%= book.price %></td>
           <td><%= book.receiptDate %></td>
+          <td><%= link_to 'Выдать', book %> </td>
           <td><%= link_to 'Редактировать', edit_book_path(book) %> </td>
           <td><%= link_to 'Удалить', book, method: :delete, data: { confirm: 'Вы уверены?' }%></td>
         </tr>
@@ -246,6 +247,7 @@
         <td><%= subscriber.middleName %></td>
         <td><%= subscriber.address %></td>
         <td><%= subscriber.phone %></td>
+        <td><%= link_to 'Просмотреть историю', subscriber %> </td>
         <td><%= link_to 'Редактировать', edit_subscriber_path(subscriber) %> </td>
         <td><%= link_to 'Удалить', subscriber, method: :delete, data: { confirm: 'Вы уверены?' }%></td>
       </tr>

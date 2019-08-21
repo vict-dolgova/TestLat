@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  issueDate: 2019-08-21
+  returnDate: 2019-08-21
+  book: one
+  subscriber: one
+
+two:
+  issueDate: 2019-08-21
+  returnDate: 2019-08-21
+  book: two
+  subscriber: two

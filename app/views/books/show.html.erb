@@ -1,0 +1,85 @@
+<h1>Выдать книгу</h1>
+<p>
+  <strong>Автор</strong>
+  <%= @book.author %>
+</p>
+
+<p>
+  <strong>Название</strong>
+  <%= @book.name %>
+</p>
+
+<p>
+  <strong>Шифр</strong>
+  <%= @book.cipher %>
+</p>
+
+<p>
+  <strong>Обложка:</strong>
+  <%= image_tag(@book.cover.url) if @book.cover.exists?%>
+</p>
+
+<p>
+  <strong>Издательство:</strong>
+  <%= @book.publishingHouse %>
+</p>
+
+<p>
+  <strong>Год издания:</strong>
+  <%= @book.publishingYear.year %>
+</p>
+
+<h1>Оформление выдачи</h1>
+<%= form_with(model: [ @book, @book.issuances.build ], local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label 'Абонент' %>
+    <%= form.collection_select :subscriber_id, Subscriber.all, :id, :ticketnumber   %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Дата выдачи' %>
+    <%= form.date_select :issueDate, {order: [:day, :month, :year] }, {required: true}%>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Дата возврата' %>
+    <%= form.date_select :returnDate, {order: [:day, :month, :year] }, {required: true}%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<%end%>
+
+<h1>История выдачей</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Абонент</th>
+      <th>Дата выдачи</th>
+      <th>Дата возврата</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @book.issuances.each do |issuance| %>
+      <% if issuance.id %>
+        <tr>
+          <td><%= issuance.id %></td>
+          <td><%= Subscriber.find(issuance.subscriber_id).ticketnumber %> <%= Subscriber.find(issuance.subscriber_id).surname %> <%= Subscriber.find(issuance.subscriber_id).name%></td>
+          <td><%= issuance.issueDate %></td>
+          <td><%= issuance.returnDate %></td>
+          <td><%= link_to 'Удалить', issuance, method: :delete, data: { confirm: 'Вы уверены?' }%></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'К библиотеке', library_path(Library.find(@book.library_id)) %>
+</p>

@@ -1,0 +1,10 @@
+<%= form_for issuance do |form| %>
+  <div class="field">
+    <%= form.label 'Дата возврата' %>
+    <%= form.date_select :returnDate, {order: [:day, :month, :year] }, {required: true}%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -5,6 +5,10 @@ class BooksController < ApplicationController
     redirect_to library_path(@library)
   end
 
+  def show
+    @book =  Book.find(params[:id])
+  end
+
   def edit
     @book =  Book.find(params[:id])
   end

@@ -1,0 +1,63 @@
+<h1>Просмотр абонента<h1>
+
+  <p>
+    <strong>Номер билета:</strong>
+    <%= @subscriber.ticketnumber %>
+  </p>
+
+  <p>
+    <strong>Фамилия:</strong>
+    <%= @subscriber.surname %>
+  </p>
+
+  <p>
+    <strong>Имя</strong>
+    <%= @subscriber.name %>
+  </p>
+
+  <p>
+    <strong>Отчество:</strong>
+    <%= @subscriber.middleName %>
+  </p>
+
+  <p>
+    <strong>Адрес:</strong>
+    <%= @subscriber.address %>
+  </p>
+
+  <p>
+    <strong>Телефон:</strong>
+    <%= @subscriber.phone %>
+  </p>
+
+  <h1>История выдачей</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Книга</th>
+        <th>Дата выдачи</th>
+        <th>Дата возврата</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @subscriber.issuances.each do |issuance| %>
+        <% if issuance.id %>
+          <tr>
+            <td><%= issuance.id %></td>
+            <td><%= Book.find(issuance.book_id).cipher %> <%= Book.find(issuance.book_id).author %> <%= Book.find(issuance.book_id).name%></td>
+            <td><%= issuance.issueDate %></td>
+            <td><%= issuance.returnDate %></td>
+            <td><%= link_to 'Редактировать', edit_issuance_path(issuance) %> </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+    <p>
+      <%= link_to 'К библиотеке', library_path(Library.find(@subscriber.library_id)) %>
+    </p>
