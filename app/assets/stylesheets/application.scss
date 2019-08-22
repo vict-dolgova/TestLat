@@ -1,0 +1,119 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+ // Custom bootstrap variables must be set or imported *before* bootstrap.
+ @import "bootstrap";
+
+ * {
+ 	margin: 0;
+ 	padding: 0;
+ }
+ .content {
+ 	min-height: calc(100vh - 190px);
+ }
+
+.header{
+  background: url("http://referatcollection.ru/wp-content/uploads/2016/12/knigi-mnogo-raznye-raskrytye-1024x357.jpg") no-repeat;
+  background-size: cover;
+  height: 250px;
+}
+
+.header h1{
+  padding-top: 50px;
+  padding-bottom: 20px;
+  font-size: 70px;
+  text-shadow: black 0 0 5px;
+  color: white;
+}
+
+.header a{
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+}
+
+.container-fluid{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer{
+  background: url("https://img3.goodfon.ru/original/2048x1365/b/5f/library-books-wood.jpg") no-repeat;
+  background-size: cover;
+  height: 150px;
+  padding-top: 20px;
+}
+
+.footer p{
+  font-size: 20px;
+  margin: 0;
+  padding-bottom: 10px;
+  text-shadow: black 0 0 3px;
+  color: white;
+}
+
+.footer a{
+  text-decoration: none;
+  text-shadow: black 0 0 5px;
+  color: white;
+}
+
+.section-book{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book{
+  width: 45%;
+  display: flex;
+  margin-bottom: 50px;
+  border: solid 2px #ffc107;
+  padding: 5px;
+}
+
+.book p{
+  margin: 5px 0;
+  font-family: Times, sans-serif;
+    font-style: italic;
+}
+
+.book p.author{
+  font-size: 24px;
+}
+
+.book p.name{
+  font-size: 26px;
+  font-weight: bolder;
+}
+
+.book a{
+  text-decoration: none;
+  color: white;
+}
+
+.book:nth-child(2n){
+  margin-left: 2.5%;
+}
+
+.book:nth-child(2n+1){
+  margin-right: 2.5%;
+}
+
+.cover{
+  margin-right: 20px;
+}
+
+.img-rounded{
+  height: 300px;
+}

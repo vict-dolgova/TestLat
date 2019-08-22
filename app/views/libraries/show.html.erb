@@ -1,24 +1,20 @@
-<p id="notice"><%= notice %></p>
+<header class="header">
 
-<p>
-  <strong>Number:</strong>
-  <%= @library.number %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @library.name %>
-</p>
+<h1><%= @library.name %></h1>
 
 <p>
   <strong>Address:</strong>
   <%= @library.address %>
 </p>
-<nav>
-  <a> Сотрудники</a>
-  <a>Книги</a>
-  <a>Абоненты</a>
-</nav>
+<div id="navbar" class="collapse navbar-collapse">
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="#">Сотрудники</a></li>
+    <li><a href="#about">Книги</a></li>
+    <li><a href="#contact">Абоненты</a></li>
+  </ul>
+</div>
+
+</header>
 
 <h1>Сотрудники</h1>
 <p>Добавить</p>
@@ -63,8 +59,8 @@
     <%= form.submit %>
   </div>
 <%end%>
-
-<table>
+<div class="container-fluid">
+<table  class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
@@ -98,6 +94,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <h1>Книги</h1>
 
@@ -148,41 +145,29 @@
   </div>
 <%end%>
 
-<table>
-  <thead>
-    <tr>
-      <th>Наименование</th>
-      <th>Автор</th>
-      <th>Шифр</th>
-      <th>Обложка</th>
-      <th>Издательство</th>
-      <th>Год издания</th>
-      <th>Цена</th>
-      <th>Дата поступления</th>
-      <th colspan="8"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @library.books.each do |book| %>
-      <% if book.id %>
-        <tr>
-          <td><%= book.name %></td>
-          <td><%= book.author %></td>
-          <td><%= book.cipher %></td>
-          <td><%= image_tag(book.cover.url) if book.cover.exists?%></td>
-          <td><%= book.publishingHouse %></td>
-          <td><%= book.publishingYear.year %></td>
-          <td><%= book.price %></td>
-          <td><%= book.receiptDate %></td>
-          <td><%= link_to 'Выдать', book %> </td>
-          <td><%= link_to 'Редактировать', edit_book_path(book) %> </td>
-          <td><%= link_to 'Удалить', book, method: :delete, data: { confirm: 'Вы уверены?' }%></td>
-        </tr>
-      <% end %>
+<div class="container-fluid section-book">
+  <% @library.books.each do |book| %>
+    <% if book.id %>
+    <div class="book">
+      <div class="cover">
+        <%= image_tag(book.cover.url, class: "img-rounded") if book.cover.exists?%>
+      </div>
+      <div>
+        <p class="author"><%= book.author %></p>
+        <p class="name"><%= book.name %></p>
+        <p>Шифр: <strong><%= book.cipher %></strong></p>
+        <p>Издательство: 	<strong>&laquo;<%= book.publishingHouse %>&raquo;</strong></p>
+        <p>Год издания: <strong><%= book.publishingYear.year %></strong></p>
+        <p>Цена: <strong><%= book.price %></strong></p>
+        <p>Дата поступления: <strong><%= book.receiptDate %></strong></p>
+        <button type="button" class="btn btn-warning"><%= link_to 'Выдать', book %></button>
+        <button type="button" class="btn btn-warning"><%= link_to 'Редактировать', edit_book_path(book) %></button>
+        <button type="button" class="btn btn-warning"><%= link_to 'Удалить', book, method: :delete, data: { confirm: 'Вы уверены?' }%></button>
+      </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+</div>
 
 
 <h1>Абоненты</h1>
@@ -224,7 +209,8 @@
   </div>
 <%end%>
 
-<table>
+<div class="container-fluid">
+<table  class="table table-striped">
   <thead>
     <tr>
       <th>Номер билета</th>
@@ -255,5 +241,5 @@
   <% end %>
 </tbody>
 </table>
-
+<div>
 <%= link_to 'Back', libraries_path %>

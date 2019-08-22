@@ -1,15 +1,19 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Libraries</h1>
-
-<table>
+<div class="content">
+<header class="header">
+  <div class="container-fluid text-center">
+    <h1>Библиотеки</h1>
+    <button type="button" class="btn btn-warning"><%= link_to 'Добавить новую', new_library_path %></button>
+  </div>
+</header>
+<div class="container-fluid">
+<table  class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
-      <th>Number</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th colspan="3"></th>
+      <th>Номер</th>
+      <th>Название</th>
+      <th>Адресс</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -20,14 +24,18 @@
         <td><%= library.number %></td>
         <td><%= library.name %></td>
         <td><%= library.address %></td>
-        <td><%= link_to 'Show', library %></td>
-        <td><%= link_to 'Edit', edit_library_path(library) %></td>
-        <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Перейти', library %></td>
+        <td><%= link_to 'Редактировать', edit_library_path(library) %></td>
+        <td><%= link_to 'Удалить', library, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
+</div>
 <br>
-
-<%= link_to 'New Library', new_library_path %>
+<footer class="footer text-center">
+  <p>Виктория Долгова</p>
+  <p><a href="tel:89150580949">8(915)-058-09-49</a></p>
+  <p><a href="mailto:vict.dovgova@gmail.com">vict.dolgova@gmail.com</a></p>
+</footer>
