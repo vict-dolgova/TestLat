@@ -1,41 +1,41 @@
 <%= form_for employee do |form| %>
 
   <div class="field">
-    <%= form.label :surname %>
-    <%= form.text_field :surname %>
+    <%= form.label "Фамилия" %>
+    <%= form.text_field :surname, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label "Имя" %>
+    <%= form.text_field :name, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :middleName %>
-    <%= form.text_field :middleName %>
+    <%= form.label "Отчество" %>
+    <%= form.text_field :middleName, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :birthDate %>
+    <%= form.label "Дата рождения" %>
     <%= form.date_select :birthDate %>
   </div>
 
   <div class="field">
-    <%= form.label :employmentDate %>
+    <%= form.label "Дата трудоустройства" %>
     <%= form.date_select :employmentDate %>
   </div>
 
   <div class="field">
-    <%= form.label :position %>
-    <%= form.text_field :position %>
+    <%= form.label "Должность" %>
+    <%= form.text_field :position, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :education %>
-    <%= form.text_field :education %>
+    <%= form.label "Образование" %>
+    <%= form.text_field :education, class: "entry" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Сохранить", class: "btn btn-warning"%>
   </div>
 <% end %>

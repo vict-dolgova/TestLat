@@ -1,35 +1,35 @@
 <%= form_for subscriber do |form| %>
   <div class="field">
-    <%= form.label :ticketnumber %>
-    <%= form.number_field :ticketnumber %>
+    <%= form.label "Номер билета:" %>
+    <%= form.number_field :ticketnumber, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :surname %>
-    <%= form.text_field :surname %>
+    <%= form.label "Фамилия" %>
+    <%= form.text_field :surname, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label "Имя:" %>
+    <%= form.text_field :name, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :middleName %>
-    <%= form.text_field :middleName %>
+    <%= form.label "Отчество:" %>
+    <%= form.text_field :middleName, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+    <%= form.label "Адрес:" %>
+    <%= form.text_field :address, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
+    <%= form.label "Телефон:" %>
+    <%= form.text_field :phone, class: "entry" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Сохранить", class: "btn btn-warning"%>
   </div>
 <% end %>

@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :number %>
-    <%= form.number_field :number %>
+    <%= form.label "Номер:" %>
+    <%= form.number_field :number, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label "Название:" %>
+    <%= form.text_field :name, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+    <%= form.label "Адрес:" %>
+    <%= form.text_field :address, class: "entry" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Сохранить", class: "btn btn-warning"%>
   </div>
 <% end %>

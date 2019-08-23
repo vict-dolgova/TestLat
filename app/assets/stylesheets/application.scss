@@ -19,7 +19,7 @@
  	padding: 0;
  }
  .content {
- 	min-height: calc(100vh - 190px);
+ 	min-height: calc(100vh - 150px);
  }
 
 .header{
@@ -196,4 +196,47 @@
 
 h4.modal-title{
   color: #815527;
+}
+
+.form-body{
+  margin: 40px 0;
+}
+
+.form-body .field{
+  width: 100%;
+}
+
+.form-body .field .entry{
+  width: 450px;
+}
+
+.form-body .field label{
+  width: 35%;
+  text-align: right;
+}
+
+.form-body.issuance .field label{
+  width: 47%;
+  text-align: right;
+}
+
+.img-edit{
+  width: 100px;
+  padding: 0 10px 10px 10px;
+}
+
+.issuance-header{
+  display: flex;
+  flex-wrap: wrap;
+  height: 250px;
+}
+
+header .img{
+  display: flex;
+}
+
+header img{
+  height: 200px;
+  margin-top: 25px;
+  margin-right: 25px;
 }

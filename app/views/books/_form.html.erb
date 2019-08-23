@@ -1,46 +1,46 @@
 <%= form_for book do |form| %>
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label "Автор:" %>
+    <%= form.text_field :author, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author %>
+    <%= form.label "Название:" %>
+    <%= form.text_field :name, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :cipher %>
-    <%= form.text_field :cipher %>
+    <%= form.label "Шифр:" %>
+    <%= form.text_field :cipher, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :cover %>
-    <%= form.file_field :cover %>
-    <%= image_tag(book.cover.url) if book.cover.exists?%>
+    <%= form.label "Обложка:" %>
+    <%= form.file_field :cover %><br>
+    <%= form.label " "%><%= image_tag(book.cover.url, class: "img-edit") if book.cover.exists?%> <br>
   </div>
 
   <div class="field">
-    <%= form.label :publishingHouse %>
-    <%= form.text_field :publishingHouse %>
+    <%= form.label "Издательство:" %>
+    <%= form.text_field :publishingHouse, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :publishingYear %>
+    <%= form.label "Год издания:" %>
     <%= form.date_select :publishingYear, {order: [:year], start_year: Date.today.year, end_year: Date.today.year - 500}, {required: true}%>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.label "Цена:" %>
+    <%= form.number_field :price, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label :receiptDate %>
+    <%= form.label "Дата поступления:" %>
     <%= form.date_select :receiptDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Сохранить", class: "btn btn-warning"%>
   </div>
 <%end%>

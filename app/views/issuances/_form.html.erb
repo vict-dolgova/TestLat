@@ -1,10 +1,25 @@
 <%= form_for issuance do |form| %>
   <div class="field">
-    <%= form.label 'Дата возврата' %>
+    <%= form.label 'Абонент:' %>
+    <span><strong><%= Subscriber.find(@issuance.subscriber_id).ticketnumber %> <%= Subscriber.find(@issuance.subscriber_id).surname %> <%= Subscriber.find(@issuance.subscriber_id).name%></strong></span>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Книга:' %>
+    <span><strong><%= Book.find(@issuance.book_id).cipher %> <%= Book.find(@issuance.book_id).author %> <%= Book.find(@issuance.book_id).name%></strong></span>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Дата выдачи:' %>
+    <span><strong><%= @issuance.issueDate%></strong></span>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Дата возврата:' %>
     <%= form.date_select :returnDate, {order: [:day, :month, :year] }, {required: true}%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Сохранить", class: "btn btn-warning"%>
   </div>
 <% end %>

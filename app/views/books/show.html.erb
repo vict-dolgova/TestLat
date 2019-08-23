@@ -1,60 +1,62 @@
-<h1>Выдать книгу</h1>
-<p>
-  <strong>Автор</strong>
-  <%= @book.author %>
-</p>
-
-<p>
-  <strong>Название</strong>
-  <%= @book.name %>
-</p>
-
-<p>
-  <strong>Шифр</strong>
-  <%= @book.cipher %>
-</p>
-
-<p>
-  <strong>Обложка:</strong>
-  <%= image_tag(@book.cover.url) if @book.cover.exists?%>
-</p>
-
-<p>
-  <strong>Издательство:</strong>
-  <%= @book.publishingHouse %>
-</p>
-
-<p>
-  <strong>Год издания:</strong>
-  <%= @book.publishingYear.year %>
-</p>
-
-<h1>Оформление выдачи</h1>
-<%= form_with(model: [ @book, @book.issuances.build ], local: true) do |form| %>
-
-  <div class="field">
-    <%= form.label 'Абонент' %>
-    <%= form.collection_select :subscriber_id, Subscriber.all, :id, :ticketnumber   %>
+<div class="content">
+<header class="header">
+  <div class="container-fluid">
+    <div class="issuance-header">
+      <div class="img">
+        <%= image_tag(@book.cover.url) if @book.cover.exists?%>
+      <div>
+        <h1><%= @book.name %></h1>
+        <h2><%= @book.author %></h2>
+        <h2><%= @book.cipher %></h2>
+      </div>
+    </div>
   </div>
+</header>
 
-  <div class="field">
-    <%= form.label 'Дата выдачи' %>
-    <%= form.date_select :issueDate, {order: [:day, :month, :year] }, {required: true}%>
+<div id="employees" class="section">
+  <div class="container-fluid">
+    <div>
+      <h1>Оформление выдачи</h1>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label 'Дата возврата' %>
-    <%= form.date_select :returnDate, {order: [:day, :month, :year] }, {required: true}%>
+<div class="container-fluid">
+  <div class="form-body issuance">
+    <%= form_with(model: [ @book, @book.issuances.build ], local: true) do |form| %>
+
+      <div class="field">
+        <%= form.label 'Абонент:' %>
+        <%= form.collection_select :subscriber_id, Subscriber.all, :id, :ticketnumber %>
+      </div>
+
+      <div class="field">
+        <%= form.label 'Дата выдачи:' %>
+        <%= form.date_select :issueDate, {order: [:day, :month, :year] }, {required: true}%>
+      </div>
+
+      <div class="field">
+        <%= form.label 'Дата возврата:' %>
+        <%= form.date_select :returnDate, {order: [:day, :month, :year] }, {required: true}%>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Выдать", class: "btn btn-warning"%>
+      </div>
+    <%end%>
   </div>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
+<div id="employees" class="section">
+  <div class="container-fluid">
+    <div>
+      <h1>История выдачей</h1>
+    </div>
   </div>
-<%end%>
+</div>
 
-<h1>История выдачей</h1>
-
-<table>
+<div class="container-fluid">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
@@ -79,7 +81,13 @@
     <% end %>
   </tbody>
 </table>
+<span class="link-back"><%= link_to 'К библиотеке', library_path(Library.find(@book.library_id)) %></span>
+</div>
+<br>
+</div>
 
-<p>
-  <%= link_to 'К библиотеке', library_path(Library.find(@book.library_id)) %>
-</p>
+<footer class="footer text-center">
+  <p>Виктория Долгова</p>
+  <p><a href="tel:89150580949">8(915)-058-09-49</a></p>
+  <p><a href="mailto:vict.dovgova@gmail.com">vict.dolgova@gmail.com</a></p>
+</footer>
