@@ -1,69 +1,32 @@
+<div class="content">
 <header class="header">
-
-<h1><%= @library.name %></h1>
-
-<p>
-  <strong>Address:</strong>
-  <%= @library.address %>
-</p>
-<div id="navbar" class="collapse navbar-collapse">
-  <ul class="nav navbar-nav">
-    <li class="active"><a href="#">Сотрудники</a></li>
-    <li><a href="#about">Книги</a></li>
-    <li><a href="#contact">Абоненты</a></li>
-  </ul>
-</div>
-
+  <div class="container-fluid">
+    <h1><%= @library.name %></h1>
+    <h2><%= @library.number %></h2>
+    <h2><%= @library.address %></h2>
+  </div>
+  <div id="menu" class="container-fluid text-center">
+    <button type="button" class="btn btn-warning"><a href="#employees">Сотрудники</a></button>
+    <button type="button" class="btn btn-warning"><a href="#books">Книги</a></span></button>
+    <button type="button" class="btn btn-warning"><a href="#subscribers">Абоненты</a></button>
+  </div>
 </header>
 
-<h1>Сотрудники</h1>
-<p>Добавить</p>
-
-<%= form_with(model: [ @library, @library.employees.build ], local: true) do |form| %>
-  <div class="field">
-    <%= form.label :surname %>
-    <%= form.text_field :surname %>
+<div id="employees" class="section">
+  <div class="container-fluid">
+    <div>
+      <h1>Сотрудники</h1>
+    </div>
+    <div class="add-model">
+      <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#add-employee">Добавить</button>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :middleName %>
-    <%= form.text_field :middleName %>
-  </div>
-
-  <div class="field">
-    <%= form.label :birthDate %>
-    <%= form.date_select :birthDate, {order: [:day, :month, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true}%>
-  </div>
-
-  <div class="field">
-    <%= form.label :employmentDate %>
-    <%= form.date_select :employmentDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
-  </div>
-
-  <div class="field">
-    <%= form.label :position %>
-    <%= form.text_field :position %>
-  </div>
-
-  <div class="field">
-    <%= form.label :education %>
-    <%= form.text_field :education %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<%end%>
 <div class="container-fluid">
 <table  class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
       <th>Фамилия</th>
       <th>Имя</th>
       <th>Отчество</th>
@@ -71,7 +34,7 @@
       <th>Дата принятия на работу</th>
       <th>Должность</th>
       <th>Образование</th>
-      <th colspan="8"></th>
+      <th colspan="7"></th>
     </tr>
   </thead>
 
@@ -79,7 +42,6 @@
     <% @library.employees.each do |employee| %>
       <% if employee.id %>
         <tr>
-          <td><%= employee.id %></td>
           <td><%= employee.surname %></td>
           <td><%= employee.name %></td>
           <td><%= employee.middleName %></td>
@@ -94,56 +56,19 @@
     <% end %>
   </tbody>
 </table>
+<span class="link-back"><%= link_to 'К списку библиотек', libraries_path %></span>
 </div>
 
-<h1>Книги</h1>
-
-<p>Добавить</p>
-<%= form_with(model: [ @library, @library.books.build ], local: true) do |form| %>
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<div id="books" class="section">
+  <div class="container-fluid">
+    <div>
+      <h1>Книги</h1>
+    </div>
+    <div class="add-model">
+      <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#add-book">Добавить</button>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author %>
-  </div>
-
-  <div class="field">
-    <%= form.label :cipher %>
-    <%= form.text_field :cipher %>
-  </div>
-
-  <div class="field">
-    <%= form.label :cover %>
-    <%= form.file_field :cover %>
-  </div>
-
-  <div class="field">
-    <%= form.label :publishingHouse %>
-    <%= form.text_field :publishingHouse %>
-  </div>
-
-  <div class="field">
-    <%= form.label :publishingYear %>
-    <%= form.date_select :publishingYear, {order: [:year], start_year: Date.today.year, end_year: Date.today.year - 500}, {required: true}%>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :receiptDate %>
-    <%= form.date_select :receiptDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<%end%>
+</div>
 
 <div class="container-fluid section-book">
   <% @library.books.each do |book| %>
@@ -168,46 +93,20 @@
     <% end %>
   <% end %>
 </div>
+<div class="container-fluid">
+  <span class="link-back"><%= link_to 'К списку библиотек', libraries_path %></span>
+</div>
 
-
-<h1>Абоненты</h1>
-<p>Добавить</p>
-
-<%= form_with(model: [ @library, @library.subscribers.build ], local: true) do |form| %>
-  <div class="field">
-    <%= form.label :ticketnumber %>
-    <%= form.number_field :ticketnumber %>
+<div id="subscribers" class="section">
+  <div class="container-fluid">
+    <div>
+      <h1>Абоненты</h1>
+    </div>
+    <div class="add-model">
+      <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#add-subscriber">Добавить</button>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :surname %>
-    <%= form.text_field :surname %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :middleName %>
-    <%= form.text_field :middleName %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<%end%>
+</div>
 
 <div class="container-fluid">
 <table  class="table table-striped">
@@ -241,5 +140,181 @@
   <% end %>
 </tbody>
 </table>
-<div>
-<%= link_to 'Back', libraries_path %>
+<span class="link-back"><%= link_to 'К списку библиотек', libraries_path %></span>
+</div>
+<br>
+</div>
+<footer class="footer text-center">
+  <p>Виктория Долгова</p>
+  <p><a href="tel:89150580949">8(915)-058-09-49</a></p>
+  <p><a href="mailto:vict.dovgova@gmail.com">vict.dolgova@gmail.com</a></p>
+</footer>
+
+
+<div class="modal fade" id="add-employee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Новый сотрудник</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: [ @library, @library.employees.build ], local: true) do |form| %>
+          <div class="field">
+            <%= form.label "Фамилия" %>
+            <%= form.text_field :surname %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Имя:" %>
+            <%= form.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Отчество:" %>
+            <%= form.text_field :middleName %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Дата рождения:" %>
+            <%= form.date_select :birthDate, {order: [:day, :month, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true}%>
+          </div>
+
+          <div class="field">
+            <%= form.label "Дата трудоустройства:" %>
+            <%= form.date_select :employmentDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
+          </div>
+
+          <div class="field">
+            <%= form.label "Должность:" %>
+            <%= form.text_field :position %>
+          </div>
+
+          <div class="field ">
+            <%= form.label "Образование:" %>
+            <%= form.text_field :education %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Добавить", class: "btn btn-warning"%>
+          </div>
+        <%end%>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add-book" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Новая книга</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: [ @library, @library.books.build ], local: true) do |form| %>
+          <div class="field">
+            <%= form.label "Автор:" %>
+            <%= form.text_field :author %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Название:" %>
+            <%= form.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= form.label :cipher %>
+            <%= form.text_field :cipher %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Обложка:" %>
+            <%= form.file_field :cover %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Издательство:" %>
+            <%= form.text_field :publishingHouse %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Год издания:" %>
+            <%= form.date_select :publishingYear, {order: [:year], start_year: Date.today.year, end_year: Date.today.year - 500}, {required: true}%>
+          </div>
+
+          <div class="field">
+            <%= form.label "Цена:" %>
+            <%= form.number_field :price %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Дата поступления:" %>
+            <%= form.date_select :receiptDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Добавить", class: "btn btn-warning"%>
+          </div>
+        <%end%>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add-subscriber" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Новый абонент</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: [ @library, @library.subscribers.build ], local: true) do |form| %>
+          <div class="field">
+            <%= form.label "Номер билета:" %>
+            <%= form.number_field :ticketnumber %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Фамилия:" %>
+            <%= form.text_field :surname %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Имя:" %>
+            <%= form.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Отчество:" %>
+            <%= form.text_field :middleName %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Адресс:" %>
+            <%= form.text_field :address %>
+          </div>
+
+          <div class="field">
+            <%= form.label "Телефон:" %>
+            <%= form.text_field :phone %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Добавить", class: "btn btn-warning"%>
+          </div>
+        <%end%>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

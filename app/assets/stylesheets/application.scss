@@ -29,23 +29,81 @@
 }
 
 .header h1{
-  padding-top: 50px;
-  padding-bottom: 20px;
-  font-size: 70px;
+  padding-top: 45px;
+  font-size: 60px;
   text-shadow: black 0 0 5px;
   color: white;
+  margin: 0;
+}
+
+.header h2{
+  text-shadow: black 0 0 5px;
+  color: white;
+  margin: 0;
+}
+
+.header .new{
+  margin-top: 30px;
 }
 
 .header a{
   text-decoration: none;
-  color: white;
+  color: black;
+  font-weight: bolder;
+}
+.header button{
+  margin: 0 10px;
+}
+
+.header .new a{
   font-size: 24px;
+}
+
+.section{
+  margin: 30px 0;
+  background-color: #815527;
+  vertical-align: middle;
+}
+
+.section h1{
+  text-shadow: black 0 0 5px;
+  color: white;
+  padding: 19px 0;
+  margin: 0;
+}
+
+
+.section a{
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+}
+
+.section .container-fluid{
+  display: flex;
+}
+
+.section .container-fluid .add-model{
+  width: 100%;
+  text-align: right;
+  padding: 19px 0;
 }
 
 .container-fluid{
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.container-fluid table a{
+  color: #815527;
+}
+
+.link-back a{
+  color: #815527;
+  font-size: 20px;
+  font-style: italic;
+  text-shadow: #ffc107 0 0 5px;
 }
 
 .footer{
@@ -99,7 +157,7 @@
 
 .book a{
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .book:nth-child(2n){
@@ -116,4 +174,26 @@
 
 .img-rounded{
   height: 300px;
+}
+
+.modal-dialog{
+  max-width: 600px !important;
+}
+
+.modal-body .field{
+  width: 100%;
+}
+
+.modal-body .field label{
+  width: 40%;
+  text-align: right;
+}
+
+.actions{
+  text-align: center;
+  margin: 10px;
+}
+
+h4.modal-title{
+  color: #815527;
 }
