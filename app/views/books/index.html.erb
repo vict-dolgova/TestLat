@@ -1,0 +1,41 @@
+<div class="content">
+<header class="header">
+  <div class="container-fluid">
+    <h1><%= @library.name %></h1>
+    <h2>Самые популярные книги </h2>
+  </div>
+</header>
+<br>
+<div class="container-fluid section-book">
+  <% @books.each do |book| %>
+    <% if book.id %>
+    <div class="book">
+      <div class="cover">
+        <%= image_tag(book.cover.url, class: "img-rounded") if book.cover.exists?%>
+      </div>
+      <div>
+        <p class="author"><%= book.author %></p>
+        <p class="name"><%= book.name %></p>
+        <p>Шифр: <strong><%= book.cipher %></strong></p>
+        <p>Издательство: 	<strong>&laquo;<%= book.publishingHouse %>&raquo;</strong></p>
+        <p>Год издания: <strong><%= book.publishingYear.year %></strong></p>
+        <p>Цена: <strong><%= book.price %></strong></p>
+        <p>Дата поступления: <strong><%= book.receiptDate %></strong></p>
+        <button type="button" class="btn btn-warning"><%= link_to 'Выдать', book %></button>
+        <button type="button" class="btn btn-warning"><%= link_to 'Редактировать', edit_book_path(book) %></button>
+        <button type="button" class="btn btn-warning"><%= link_to 'Удалить', book, method: :delete, data: { confirm: 'Вы уверены?' }%></button>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+</div>
+<div class="container-fluid">
+  <span class="link-back"><%= link_to 'К библиотеке', library_path(@library) %></span>
+</div>
+<br>
+<footer class="footer text-center">
+  <p>Виктория Долгова</p>
+  <p><a href="tel:89150580949">8(915)-058-09-49</a></p>
+  <p><a href="mailto:vict.dovgova@gmail.com">vict.dolgova@gmail.com</a></p>
+</footer>

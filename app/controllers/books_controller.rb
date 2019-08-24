@@ -5,6 +5,24 @@ class BooksController < ApplicationController
     redirect_to library_path(@library)
   end
 
+  #use for "Top 10 books"
+  def index
+    @library = Library.find(params[:library_id])
+    @books_all = Book.where(library_id: @library.id)
+    @issuances = Issuance.group(:book_id).count.sort{|b,a| a[1]<=>b[1]}
+    @books = Array.new
+    @count = 0
+    @issuances.each do |iss|
+      if @books_all.include?(Book.find(iss[0]))
+        @books.push(@books_all.find(iss[0]))
+        @count = @count + 1
+      end
+      if @count == 10
+        break
+      end
+    end
+  end
+
   def show
     @book =  Book.find(params[:id])
   end
