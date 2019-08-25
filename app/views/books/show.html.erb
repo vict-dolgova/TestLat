@@ -24,18 +24,25 @@
 <div class="container-fluid">
   <div class="form-body issuance">
     <%= form_with(model: [ @book, @book.issuances.build ], local: true) do |form| %>
+    <% @l=Issuance.where(book_id: @book.id).order(:returnDate).last %>
+    <% if @l %>
+      <div class="field">
+        <%= form.label 'Книгу вернут/вернули:' %>
+        <strong><%= @l.returnDate %></strong>
+      </div>
+    <% end %>
 
       <div class="field">
         <%= form.label 'Абонент:' %>
-        <%= form.collection_select :subscriber_id, Subscriber.all, :id, :ticketnumber %>
+        <%= form.collection_select :subscriber_id, Subscriber.where(library_id: @book.library_id), :id, :ticketnumber %>
       </div>
 
-      <div class="field">
+      <div class="field date">
         <%= form.label 'Дата выдачи:' %>
         <%= form.date_select :issueDate, {order: [:day, :month, :year] }, {required: true}%>
       </div>
 
-      <div class="field">
+      <div class="field date">
         <%= form.label 'Дата возврата:' %>
         <%= form.date_select :returnDate, {order: [:day, :month, :year] }, {required: true}%>
       </div>
@@ -45,6 +52,7 @@
       </div>
     <%end%>
   </div>
+  <span class="link-back"><%= link_to 'К библиотеке', library_path(Library.find(@book.library_id)) %></span>
 </div>
 
 <div id="employees" class="section">

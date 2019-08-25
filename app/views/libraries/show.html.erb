@@ -65,7 +65,7 @@
       <h1>Книги</h1>
     </div>
     <div class="add-model">
-      <button type="button" class="btn btn-warning btn-lg"><%= link_to 'Топ 10', library_books_path(@library) %></button>
+      <button type="button" class="btn btn-warning btn-lg top10"><%= link_to 'Топ 10', library_books_path(@library) %></button>
       <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#add-book">Добавить</button>
     </div>
   </div>
@@ -163,6 +163,7 @@
       </div>
       <div class="modal-body">
         <%= form_with(model: [ @library, @library.employees.build ], local: true) do |form| %>
+
           <div class="field">
             <%= form.label "Фамилия" %>
             <%= form.text_field :surname %>
@@ -219,6 +220,7 @@
       </div>
       <div class="modal-body">
         <%= form_with(model: [ @library, @library.books.build ], local: true) do |form| %>
+
           <div class="field">
             <%= form.label "Автор:" %>
             <%= form.text_field :author %>
@@ -251,7 +253,7 @@
 
           <div class="field">
             <%= form.label "Цена:" %>
-            <%= form.number_field :price %>
+            <%= form.number_field :price, min: 0 %>
           </div>
 
           <div class="field">

@@ -2,7 +2,19 @@ class IssuancesController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     @issuance = @book.issuances.create(issuance_params)
-    redirect_to book_path(@book)
+    if @issuance.save
+      redirect_to book_path(@book)
+    else render inline: "<div>
+        <h2>Возникли ошибки! Список условий для успешного сохранения выдачи:</h2>
+        <ul>
+          <li>Абонент не может быть пустым;</li>
+          <li>Дата возврата должна не раньше даты выдачи;</li>
+          <li>Дата выдачи должна быть не раньше даты возвращения книги.</li>
+        </ul>
+        <h2>Попробуйте еще раз</h2>
+        <%= link_to 'Назад', book_path(@book) %>
+      </div>"
+    end
   end
 
   def edit

@@ -1,19 +1,19 @@
 <%= form_with(model: library, local: true) do |form| %>
   <% if library.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(library.errors.count, "error") %> prohibited this library from being saved:</h2>
-
+      <h2>Возникли ошибки! Список условий для успешного сохранения:</h2>
       <ul>
-      <% library.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <li>Номер библиотеки не может быть пустым;</li>
+        <li>Название библиотеки не может быть пустым (минимум 5 символов);</li>
+        <li>Адрес библиотеки не может быть пустым (минимум 5 символов).</li>
       </ul>
     </div>
+      <br>
   <% end %>
 
   <div class="field">
     <%= form.label "Номер:" %>
-    <%= form.number_field :number, class: "entry" %>
+    <%= form.number_field :number, class: "entry", min: 0 %>
   </div>
 
   <div class="field">

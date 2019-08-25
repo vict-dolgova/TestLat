@@ -2,7 +2,20 @@ class SubscribersController < ApplicationController
   def create
     @library = Library.find(params[:library_id])
     @subscriber = @library.subscribers.create(subscriber_params)
-    redirect_to library_path(@library)
+    if @subscriber.save
+      redirect_to library_path(@library)
+    else render inline: "<div>
+        <h2>Возникли ошибки! Список условий для успешного сохранения абонента:</h2>
+        <ul>
+          <li>Номер билета не может быть пустым;</li>
+          <li>Фамилия абонента не может быть пустой;</li>
+          <li>Имя абонента не может быть пустым;</li>
+          <li>Адрес абонента не может быть пустым.</li>
+        </ul>
+        <h2>Попробуйте еще раз</h2>
+        <%= link_to 'Назад', library_path(@library) %>
+      </div>"
+    end
   end
 
   def show

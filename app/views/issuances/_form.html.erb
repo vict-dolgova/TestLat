@@ -1,4 +1,24 @@
 <%= form_for issuance do |form| %>
+<% if issuance.errors.any? %>
+  <div id="error_explanation">
+    <h2>Возникли ошибки! Список условий для успешного сохранения:</h2>
+    <ul>
+      <li>Абонент не может быть пустым;</li>
+      <li>Дата возврата должна не раньше даты выдачи;</li>
+      <li>Дата выдачи должна быть не раньше даты возвращения книги.</li>
+    </ul>
+  </div>
+    <br>
+<% end %>
+
+  <% @l=Issuance.where(book_id: @issuance.book_id).order(:returnDate).last %>
+  <% if @l %>
+    <div class="field">
+      <%= form.label 'Книгу вернут/вернули:' %>
+      <strong><%= @l.returnDate %></strong>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label 'Абонент:' %>
     <span><strong><%= Subscriber.find(@issuance.subscriber_id).ticketnumber %> <%= Subscriber.find(@issuance.subscriber_id).surname %> <%= Subscriber.find(@issuance.subscriber_id).name%></strong></span>
@@ -9,12 +29,12 @@
     <span><strong><%= Book.find(@issuance.book_id).cipher %> <%= Book.find(@issuance.book_id).author %> <%= Book.find(@issuance.book_id).name%></strong></span>
   </div>
 
-  <div class="field">
+  <div class="field date">
     <%= form.label 'Дата выдачи:' %>
     <span><strong><%= @issuance.issueDate%></strong></span>
   </div>
 
-  <div class="field">
+  <div class="field date">
     <%= form.label 'Дата возврата:' %>
     <%= form.date_select :returnDate, {order: [:day, :month, :year] }, {required: true}%>
   </div>

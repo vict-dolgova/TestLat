@@ -2,7 +2,21 @@ class BooksController < ApplicationController
   def create
     @library = Library.find(params[:library_id])
     @book = @library.books.create(book_params)
-    redirect_to library_path(@library)
+    if @book.save
+      redirect_to library_path(@library)
+    else render inline: "<div>
+        <h2>Возникли ошибки! Список условий для успешного сохранения книги:</h2>
+        <ul>
+          <li>Название книги не может быть пустым;</li>
+          <li>Автор книги не может быть пустым;</li>
+          <li>Вес изображения обложки не должен превышать 1 MB;</li>
+          <li>Издательство не может быть пустым;</li>
+          <li>Цена книги не может быть пустой.</li>
+        </ul>
+        <h2>Попробуйте еще раз</h2>
+        <%= link_to 'Назад', library_path(@library) %>
+      </div>"
+    end
   end
 
   #use for "Top 10 books"

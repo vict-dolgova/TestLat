@@ -1,4 +1,17 @@
 <%= form_for book do |form| %>
+<% if book.errors.any? %>
+  <div id="error_explanation">
+    <h2>Возникли ошибки! Список условий для успешного сохранения:</h2>
+    <ul>
+      <li>Название книги не может быть пустым;</li>
+      <li>Автор книги не может быть пустым;</li>
+      <li>Вес изображения обложки не должен превышать 1 MB;</li>
+      <li>Издательство не может быть пустым;</li>
+      <li>Цена книги не может быть пустой.</li>
+    </ul>
+  </div>
+    <br>
+<% end %>
   <div class="field">
     <%= form.label "Автор:" %>
     <%= form.text_field :author, class: "entry" %>
@@ -17,6 +30,8 @@
   <div class="field">
     <%= form.label "Обложка:" %>
     <%= form.file_field :cover %><br>
+  </div>
+  <div class="field">
     <%= form.label " "%><%= image_tag(book.cover.url, class: "img-edit") if book.cover.exists?%> <br>
   </div>
 
@@ -25,17 +40,17 @@
     <%= form.text_field :publishingHouse, class: "entry" %>
   </div>
 
-  <div class="field">
+  <div class="field date">
     <%= form.label "Год издания:" %>
     <%= form.date_select :publishingYear, {order: [:year], start_year: Date.today.year, end_year: Date.today.year - 500}, {required: true}%>
   </div>
 
   <div class="field">
     <%= form.label "Цена:" %>
-    <%= form.number_field :price, class: "entry" %>
+    <%= form.number_field :price, class: "entry", min: 0 %>
   </div>
 
-  <div class="field">
+  <div class="field date">
     <%= form.label "Дата поступления:" %>
     <%= form.date_select :receiptDate, {order: [:day, :month, :year], start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true}%>
   </div>

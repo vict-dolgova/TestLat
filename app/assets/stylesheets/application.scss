@@ -204,24 +204,42 @@ h4.modal-title{
 
 .form-body .field{
   width: 100%;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .form-body .field .entry{
   width: 450px;
+  height: 24px;
 }
 
 .form-body .field label{
   width: 35%;
   text-align: right;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.form-body .field.date select{
+  width: 100px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.form-body .field select{
+  width: 320px;
+  height: 24px;
+  margin-right: 10px;
 }
 
 .form-body.issuance .field label{
-  width: 47%;
+  width: 43%;
   text-align: right;
 }
 
 .img-edit{
   width: 100px;
+  height: 100%;
   padding: 0 10px 10px 10px;
 }
 

@@ -1,4 +1,17 @@
 <%= form_for subscriber do |form| %>
+<% if subscriber.errors.any? %>
+  <div id="error_explanation">
+    <h2>Возникли ошибки! Список условий для успешного сохранения:</h2>
+    <ul>
+      <li>Номер билета не может быть пустым;</li>
+      <li>Фамилия абонента не может быть пустой;</li>
+      <li>Имя абонента не может быть пустым;</li>
+      <li>Адрес абонента не может быть пустым.</li>
+    </ul>
+  </div>
+    <br>
+<% end %>
+
   <div class="field">
     <%= form.label "Номер билета:" %>
     <%= form.number_field :ticketnumber, class: "entry" %>

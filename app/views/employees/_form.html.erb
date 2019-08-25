@@ -1,37 +1,48 @@
 <%= form_for employee do |form| %>
+<% if employee.errors.any? %>
+  <div id="error_explanation">
+    <h2>Возникли ошибки! Список условий для успешного сохранения:</h2>
+    <ul>
+      <li>Фамилия сотрудника не может быть пустой;</li>
+      <li>Имя сотрудника не может быть пустым;</li>
+      <li>Должность сотрудника не может быть пустой.</li>
+    </ul>
+  </div>
+    <br>
+<% end %>
 
   <div class="field">
-    <%= form.label "Фамилия" %>
+    <%= form.label "Фамилия:" %>
     <%= form.text_field :surname, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label "Имя" %>
+    <%= form.label "Имя:" %>
     <%= form.text_field :name, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label "Отчество" %>
+    <%= form.label "Отчество:" %>
     <%= form.text_field :middleName, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label "Дата рождения" %>
+    <%= form.label "Дата рождения:" %>
     <%= form.date_select :birthDate %>
   </div>
 
   <div class="field">
-    <%= form.label "Дата трудоустройства" %>
+    <%= form.label "Дата трудоустройства:" %>
     <%= form.date_select :employmentDate %>
   </div>
 
   <div class="field">
-    <%= form.label "Должность" %>
+    <%= form.label "Должность:" %>
     <%= form.text_field :position, class: "entry" %>
   </div>
 
   <div class="field">
-    <%= form.label "Образование" %>
+    <%= form.label "Образование:" %>
     <%= form.text_field :education, class: "entry" %>
   </div>
 

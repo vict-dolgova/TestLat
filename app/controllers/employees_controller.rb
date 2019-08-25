@@ -3,7 +3,19 @@ class EmployeesController < ApplicationController
   def create
     @library = Library.find(params[:library_id])
     @employee = @library.employees.create(employee_params)
-    redirect_to library_path(@library)
+    if @employee.save
+      redirect_to library_path(@library)
+    else render inline: "<div>
+        <h2>Возникли ошибки! Список условий для успешного сохранения сотрудника:</h2>
+        <ul>
+          <li>Фамилия сотрудника не может быть пустой;</li>
+          <li>Имя сотрудника не может быть пустым;</li>
+          <li>Должность сотрудника не может быть пустой.</li>
+        </ul>
+        <h2>Попробуйте еще раз</h2>
+        <%= link_to 'Назад', library_path(@library) %>
+      </div>"
+    end
   end
 
   def edit
